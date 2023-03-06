@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                       physics: const ScrollPhysics(),
                       childAspectRatio: (itemWidth / itemHeight),
                       children: [
-                        ...?data.map((element) => Container(
+                        ...?data.map((e) => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             boxShadow: [
@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                               ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: Image.network(
-                                    'https://image.tmdb.org/t/p/w500/sv1xJUazXeYqALzczSZ3O6nkH75.jpg',
+                                    'https://image.tmdb.org/t/p/w500/${e.posterPath}',
                                     height: 500,
                                     width: 200,
                                     fit: BoxFit.cover,
@@ -84,19 +84,19 @@ class HomePage extends StatelessWidget {
                                   bottom: 10,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const [
+                                    children: [
                                       Text(
                                         '2006',
                                         style: TextStyle(
-                                            color: Colors.white54,
+                                            color: Colors.white10,
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Text(
-                                        'ARRIVAL',
-                                        style: TextStyle(
+                                        e.originalTitle ?? '',
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w800),
                                       )
