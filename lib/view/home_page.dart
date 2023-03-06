@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                                       Text(
                                         '2006',
                                         style: TextStyle(
-                                            color: Colors.white10,
+                                            color: Colors.white70,
                                             fontWeight: FontWeight.w500),
                                       ),
                                       const SizedBox(
