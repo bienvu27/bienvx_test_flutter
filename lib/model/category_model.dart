@@ -1,3 +1,11 @@
+import 'dart:convert';
+
+List<CategoryModel> itemFromJson(String str) => List<CategoryModel>.from(
+    json.decode(str).map((x) => CategoryModel.fromJson(x)));
+
+String itemToJson(List<CategoryModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class CategoryModel {
   bool? adult;
   String? backdropPath;
