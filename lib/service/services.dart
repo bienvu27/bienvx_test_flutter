@@ -9,6 +9,7 @@ class Services {
     var response = await client.get(
       Uri.parse('$baseURL/3/discover/movie?$api_key&page=$page'),
     );
+    print('$baseURL/3/discover/movie?$api_key&page=$page');
     return response;
   }
 }

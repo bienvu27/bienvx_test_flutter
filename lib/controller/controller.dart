@@ -14,6 +14,9 @@ class Controller extends GetxController {
   // ===============================================
   final loading = true.obs;
   var itemList = List<CategoryModel>.empty(growable: true).obs;
+  int page = 1;
+  List posts = [];
+
   ScrollController scrollController = ScrollController();
 
   Future<void> fetchCategory() async {
@@ -47,16 +50,16 @@ class Controller extends GetxController {
   @override
   void onInit() async {
     // await fetchCategory();
-    await fetchItem(1);
+    await fetchItem(page);
     super.onInit();
-    scrollController.addListener(scrollListener);
+    scrollController.addListener(scrollLister);
   }
 
   fetchItem(int start) async {
     try {
       loading(true);
-      itemList.clear();
       var response = await Services.fetchItem(start);
+      print(Services.fetchItem(start));
 
       if (response.statusCode == 200) {
         final rawData =
@@ -67,6 +70,7 @@ class Controller extends GetxController {
           (e) => CategoryModel.fromJson(e),
         );
         categoryModel.value = listResult.toList();
+        posts = posts + listResult.toList();
         update();
       }
     } finally {
@@ -74,12 +78,19 @@ class Controller extends GetxController {
     }
   }
 
-  void scrollListener() {
+  Future<void> scrollLister() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
+      loading.value = true;
+      page = page + 1;
+      print(page);
+      await fetchItem(page);
+      loading.value = false;
+      update();
       print('Call');
     } else {
       print('Don`t Call');
     }
+
   }
 }
